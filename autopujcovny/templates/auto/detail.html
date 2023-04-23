@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row text-light mt-2">
+        <div class="col-md-4">
+            <img src="{{ auto.foto.url }}" alt="{{ auto.oznaceni }}" class="img-fluid">
+            <h4 class="text-info">{{ auto.autopujcovna }}</h4>
+            <p>{{ auto.autopujcovna.adresa }}<br>
+            E-mail: {{ auto.autopujcovna.email }}<br>
+            Telefon: {{ auto.autopujcovna.telefon }}</p>
+            <hr>
+            <p>Cena pronájmu: <b>{{ auto.cena }} Kč</b> za 1 hodinu</p>
+        </div>
+        <div class="col-md-8">
+            <h2 class="text-center bg-info text-light p-2 mt-2 mb-3">{{ auto.oznaceni }} <small class="badge-pill badge-light">{{ auto.spz }}</small></h2>
+            <div class="row detail">
+                <div class="col-md-6">
+                    <h3>Parametry</h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">Rok výroby: <b>{{ auto.rok_vyroby }}</b></li>
+                        <li class="list-group-item">Výkon motoru: <b>{{ auto.vykon }} kW</b></li>
+                        <li class="list-group-item">Typ paliva: <b>{{ auto.palivo }}</b></li>
+                        <li class="list-group-item">Převodovka: <b>{{ auto.prevodovka }}</b></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Vybavení</h3>
+                    <p>{{ auto.vybava }}</p>
+                    <hr>
+                    <p>Počet míst: <span class="badge-pill badge-info">{{ auto.pocet_mist }}</span></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

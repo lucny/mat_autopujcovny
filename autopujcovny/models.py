@@ -3,6 +3,7 @@ from django.db import models
 from django.core.validators import EmailValidator, RegexValidator, MinValueValidator, MaxValueValidator
 from django.dispatch import receiver
 from django.utils import timezone
+from django.utils.timezone import now
 
 
 class Autopujcovna(models.Model):
@@ -153,3 +154,27 @@ def autopujcovna_post_save(sender, instance, created, **kwargs):
             # nahrazení řetězce None správným id záznamu v cestě uložené v databázi
             instance.logo.name = instance.logo.name.replace('None', str(instance.id))
             instance.save()
+
+
+class Pronajem(models.Model):
+    zakaznik = models.ForeignKey('Zakaznik', verbose_name='Zákazník', on_delete=models.CASCADE)
+    auto = models.ForeignKey('Auto', verbose_name='Auto', on_delete=models.CASCADE)
+    vypujceno = models.DateTimeField(verbose_name='Vypůjčeno', help_text='Datum a čas zahájení pronájmu', default=now())
+    vraceno = models.DateTimeField(verbose_name='Vráceno', help_text='Datum a čas ukončení pronájmu', blank=True, null=True)
+    ujeto = models.PositiveIntegerField(verbose_name='Ujeto km', help_text='Zadejte počet ujetých km', default=0,
+                                        validators=[MaxValueValidator(9999)])
+    poznamka = models.TextField(verbose_name='Poznámka', help_text='Uveďte případné zjištěné závady a problémy', blank=True)
+    PLATBA = [
+        ('hotovost', 'Hotovost'),
+        ('platební karta', 'Platební karta'),
+        ('převod', 'Převodem na účet'),
+    ]
+    platba = models.CharField(choices=PLATBA, max_length=20, verbose_name='Způsob úhrady', help_text='Zvolte způsob úhrady')
+
+    class Meta:
+        verbose_name = 'Pronájem auta'
+        verbose_name_plural = 'Pronájmy aut'
+        ordering = ['auto', '-vypujceno']
+
+    def __str__(self):
+        return f'{self.vypujceno.strftime("%Y-%m-%d")}: {self.auto} - {self.zakaznik.jmeno[:1]}. {self.zakaznik.prijmeni}'

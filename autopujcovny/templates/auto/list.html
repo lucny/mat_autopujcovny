@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="text-center bg-info text-light p-2 mt-2 mb-3">Seznam aut - diesel</h2>
+        <table class="table table-dark auto-list">
+            <thead class="bg-secondary">
+                <tr>
+                    <th>Značka</th>
+                    <th>SPZ</th>
+                    <th>Rok výroby</th>
+                    <th>Autopůjčovna</th>
+                    <th>Palivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for auto in auta %}
+                <tr>
+                    <td><b><a href="{% url 'auta_detail' auto.id %}" class="text-info">{{ auto.oznaceni|upper }}</a></b></td>
+                    <td>{{ auto.spz }}</td>
+                    <td>{{ auto.rok_vyroby }}</td>
+                    <td class="text-warning"><img src="{{ auto.autopujcovna.logo.url }}" alt="{{ auto.autopujcovna.nazev }}" class="img-fluid rounded-circle">{{ auto.autopujcovna.nazev }}</td>
+                    <td>{{ auto.palivo }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

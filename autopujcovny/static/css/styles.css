@@ -9,6 +9,31 @@ header {
     background-position: right top;
 }
 
+.auto-list img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.detail h3 {
+    font-size: 1.2em;
+    text-align: center;
+    padding: 10px;
+    background-color: #666;
+    border-radius: 10px;
+}
+
+h2 {
+    border-radius: 10px;
+}
+
 .bg-dark  {
     background-color: #000 !important;
+}
+
+.table-dark {
+    background-color: #111 !important;
+}
+
+.list-group-item {
+    background-color: #222;
 }

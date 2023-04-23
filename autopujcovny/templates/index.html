@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-8 mt-3 mb-3">
+            <h2 class="bg-info text-light text-center text-uppercase p-3">{{ nadpis }}</h2>
+            <div class="row mb-3">
+            {% for pujcovna in autopujcovny %}
+                <div class="col-lg-6">
+                    <img src="{{ pujcovna.logo.url }}" alt="{{ pujcovna.nazev }}" class="img-fluid img-thumbnail m-2">
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-4 mt-3 mb-3">
+            <h2 class="text-secondary text-center text-uppercase p-3">Spokojenost zákazníků</h2>
+            <ul class="list-group">
+            {% for ohlas in hodnoceni %}
+                <li class="list-group-item bg-secondary">
+                    <h5 class="text-light text-light">{{ ohlas.autopujcovna.nazev }}
+                        <span class="badge badge-light">{{ ohlas.spokojenost }} %</span></h5>
+                    <hr>
+                    <p class="text-light">{{ ohlas.komentar|truncatewords:20 }}</p>
+                    <p><b>{{ ohlas.zakaznik.jmeno|first }}{{ ohlas.zakaznik.prijmeni|first }}</b>, {{ ohlas.cas }}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

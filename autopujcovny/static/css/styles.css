@@ -1,0 +1,14 @@
+body {
+    background-color: #111;
+}
+
+header {
+    background-color: #040404;
+    background-image: url('../img/car-banner.jpg');
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.bg-dark  {
+    background-color: #000 !important;
+}
